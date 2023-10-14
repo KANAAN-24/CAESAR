@@ -1,0 +1,84 @@
+
+enum MOTION_MODE
+{
+  STANDBY,
+  FORWARD,
+  FORWARD_ENCODER,
+  PRE_FINAL,
+  CORNER,
+  PARKING,
+  TURNE,
+  SHIFT_RIGHT,
+  SHIFT_LEFT,
+  TURNENCODR1,
+  TURNENCODER2,
+  STOP,
+} motion_mode = STANDBY;
+
+
+enum SHIFT_STAGES
+{
+  TURN1,
+  TURN2,
+  STRIGHT,
+  FINISH,
+  REVERCE,
+ 
+} shift_Stages = TURN1;
+
+enum MOVE_STAGE
+{
+  STAGE1,
+  STAGE2,
+  STAGE3,
+  STAGE4,
+  STAGE5,
+  STAGE6,
+  STAGE7,
+  STAGE8,
+  STAGE9,
+
+} move_Stage = STAGE1;
+
+enum OBSTACLE_STAGE
+{
+  FIRST,
+  FFF,
+  NFF,
+  NNF,
+  NNN,
+  FNN,
+  FFN,
+  NFN,
+  FNF,
+  FINAL,
+} obstacle_Stage = FIRST;
+
+enum PRE_OB_STAGE
+{
+  GO_,
+  Go_FIRST_TURNE,
+  Go_SECOND_TURNE,
+  GO_STRIGHT,
+  GO_STRIGHT_ENCODER,
+  GO_STRIGHT_ENCODER2,
+  Go_STRIGHT_NEAR_OB,
+  GO_REVERCE_ENCODER,
+  END_,
+} pre_Ob_Stage = GO_;
+
+enum  CORNER_STAGE
+{
+  START_,
+  TURNE_L_,
+  TURNE_R_,
+  PRE_TURNE90_,
+  REDEY_TO_TURNE_,
+  TURNE90_,
+  STRIGHT_,
+  STRIGHT_ENCODER_,
+  REVERCE_ENCODER_,
+  REVERCE_,
+  SEE_OBSTACLE_,
+  GO_TO_OB_,
+} corner_Stage =  STRIGHT_;
