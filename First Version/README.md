@@ -6,8 +6,8 @@ We are the Kanaan team from the Qabatya Directorate of Education of the State of
 
 ## Authors ##
 
-Hisham Omar Qalawah
-Majd Khaled Azzam
+Hisham Omar Qalawah.
+Majd Khaled Azzam.
 
 ## Version History ##
 
