@@ -8,9 +8,9 @@ We designed, assembled and programmed the robot, which we called Caesar, to perf
 # Team members #
 
 1) Student name: Hisham Omar Qalalwah ,
-Email: hishamqalalwal@gmail.com
+Email Address: hishamqalalwal@gmail.com
 2) Student name and email: Majd Khaled Azzam ,
-Email: majoodazzam2@gmail.com
+Email Address: majoodazzam2@gmail.com
 
 
 # Content #
