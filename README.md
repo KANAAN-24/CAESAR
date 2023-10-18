@@ -6,7 +6,6 @@ We designed, assembled and programmed the robot, which we called Caesar, to perf
 
 
 ## Authors ##
-
 1) Hisham Omar Qalawah.
 2) Majd Khaled Azzam.
 
