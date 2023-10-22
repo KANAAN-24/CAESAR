@@ -5,12 +5,12 @@
 #define UNKNOWN_DIRECTION -1
 
 #define STRAIGHT_STEERING 88
-// #define STRAIGHT_STEERING 90
+//#define STRAIGHT_STEERING 90
 #define SPEED2 200
 #define SLOW_SPEED2 175
 #define SLOW_SPEED3 165
 #define SLOW_SPEED 150
-// int initR,initL,initF;
+//int initR,initL,initF;
 int rounCounter = 0;
 int rotionDirection = UNKNOWN_DIRECTION;
 bool pinAttached;
@@ -21,21 +21,19 @@ int steeringAngle;
 const int freq = 40000;
 const int pwmChannel = 2;
 const int resolution = 8;
-// int dutyCycle = 200;
+//int dutyCycle = 200;
 volatile unsigned long encoder_count = 0;
 int speed;
 unsigned long driveTime = 0;
 
-void IRAM_ATTR isr()
-{
+void IRAM_ATTR isr() {
   encoder_count++;
 }
-void initCar()
-{
+void initCar() {
 
   speed = 0;
   steering.attach(STEERING_PIN);
-  // steeringAngle=89; //  >90 Rigth     <90 LEFT
+  //steeringAngle=89; //  >90 Rigth     <90 LEFT
   steering.write(STRAIGHT_STEERING);
   // put your setup code here, to run once:
   pinMode(PWM, OUTPUT);
@@ -54,31 +52,24 @@ void initCar()
   digitalWrite(IN2, LOW);
   speed = 0;
 
-  steering.setPeriodHertz(50); // standard 50 hz servo
-                               // myservo.attach(servoPin, 1000, 2000); // attaches the servo on pin 18 to the servo object
+  steering.setPeriodHertz(50);  // standard 50 hz servo
+                                //myservo.attach(servoPin, 1000, 2000); // attaches the servo on pin 18 to the servo object
 }
-void setSteering(int ang)
-{
+void setSteering(int ang) {
   steering.write(ang);
 }
 
-void forward(int speed)
-{
-  // ledcAttachPin(PWM, pwmChannel);
-  // analogWrite(PWM,speed);
-  if (speed > 254)
-  {
-    if (pinAttached)
-    {
+void forward(int speed) {
+  //ledcAttachPin(PWM, pwmChannel);
+  //analogWrite(PWM,speed);
+  if (speed > 254) {
+    if (pinAttached) {
       ledcDetachPin(PWM);
       pinAttached = false;
     }
     digitalWrite(PWM, HIGH);
-  }
-  else
-  {
-    if (!pinAttached)
-    {
+  } else {
+    if (!pinAttached) {
       ledcAttachPin(PWM, pwmChannel);
       pinAttached = true;
     }
@@ -87,23 +78,17 @@ void forward(int speed)
   digitalWrite(IN1, HIGH);
   digitalWrite(IN2, LOW);
 }
-void reverse(int speed)
-{
-  // Serial.println("Drive Revirce");
-  // analogWrite(PWM,speed);
-  if (speed > 254)
-  {
-    if (pinAttached)
-    {
+void reverse(int speed) {
+  //Serial.println("Drive Revirce");
+  //analogWrite(PWM,speed);
+  if (speed > 254) {
+    if (pinAttached) {
       ledcDetachPin(PWM);
       pinAttached = false;
     }
     digitalWrite(PWM, HIGH);
-  }
-  else
-  {
-    if (!pinAttached)
-    {
+  } else {
+    if (!pinAttached) {
       ledcAttachPin(PWM, pwmChannel);
       pinAttached = true;
     }
@@ -113,9 +98,9 @@ void reverse(int speed)
   digitalWrite(IN2, HIGH);
 }
 
-void stop()
-{
+
+
+void stop() {
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, LOW);
 }
-
