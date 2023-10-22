@@ -1,4 +1,3 @@
-
 #include"mode.h"
 #include"Pins.h"
 #include"RGBAndMode.h"
@@ -11,10 +10,10 @@
 #include"level1.h"
 #include"level2.h"
 
-unsigned long displayTime=0;
+unsigned long displayTime = 0;
 
 void setup() {
- 
+
   Serial.begin(115200);
   initRGBAndMode();
   led(RED);
@@ -22,31 +21,56 @@ void setup() {
   init_mpu();
   //initBT();
   initUltrasonic();
-  
+
   initSteering();
   delay(500);
   readUltrasonic();
   initLevel1();
-  motion_mode=STANDBY;
+  motion_mode = STANDBY;
   checkLevel();
-  driveTime=millis();
-  
+  driveTime = millis();
+
 }
 
 void loop() {
-  
+
   //if(pidState){steering.write(steeringPID); }
-  
-   //debugUltrasonic();
+
+  // debugUltrasonic();
   //Serial.print("steps to turn="); Serial.println((1000/46)*(initF-15));
   readAngle();
- // readBT();
+  // readBT();
   checkStartButton();
-  if (start){
-    if(level){ readDistance(readDistanseFrom);  doLevel2();}
-    else{readUltrasonic();  doLevel1();}
+  if (start) {
+
+    if (level) {
+      readDistance(readDistanseFrom);
+      doLevel2();
+    }
+    else {
+      readUltrasonic();
+      doLevel1();
+    }
   }
-  else{  readUltrasonic(); encoder_count=0; if(level){initLevel2(); } else{initLevel1();} }
+  else {
+    readUltrasonic();
+    encoder_count = 0;
+    if (level) {
+      initLevel2();
+//*****************************
+ rounCounter=7;
+ rotionDirection=ANTI_CLOCKWIZE;
+// rotionDirection=CLOCKWIZE;
+ currentPosition='F';
+ move_Stage=STAGE1;
+// obstacles[0]="FFF"; obstacles[1]="FFF"; obstacles[2]="FFF";
+ obstacles[0]="NNN"; obstacles[1]="NNN"; obstacles[2]="NNN";
+//************************
+      
+    } else {
+      initLevel1();
+    }
+  }
 
   //if(millis()-displayTime>200){debugUltrasonic();/* debugLevel1(); debugRotation();*/ displayTime=millis();}
 
