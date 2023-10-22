@@ -1,7 +1,6 @@
 unsigned long runTime = 0;
 bool isStarted;
-void debugLevel1()
-{
+void debugLevel1() {
   Serial.print("encoder_count: ");
   Serial.print(encoder_count);
   Serial.print("rounCounter: ");
@@ -10,8 +9,7 @@ void debugLevel1()
   Serial.print(setpoint);
   Serial.println();
 }
-void initLevel1()
-{
+void initLevel1() {
   isStarted = false;
   initAngle = currentAngle;
   motion_mode = STANDBY;
@@ -23,42 +21,30 @@ void initLevel1()
   rotionDirection = UNKNOWN_DIRECTION;
   setpoint = rangeR;
 }
-void doForwardWithEncoder()
-{
-  if (encoder_count > 600)
-  {
+void doForwardWithEncoder() {
+  if (encoder_count > 600) {
     motion_mode = FORWARD;
-  }
-  else
-  {
+  } else {
     forward(255);
     steering.write(steeringPID);
   }
 }
 //*****************************
-void doTurnEncoder()
-{
-  if (rotionDirection == CLOCKWIZE)
-  {
+void doTurnEncoder() {
+  if (rotionDirection == CLOCKWIZE) {
     steeringAngle = STRAIGHT_STEERING + 35;
     setSteering(steeringAngle);
-  }
-  else if (rotionDirection == ANTI_CLOCKWIZE)
-  {
+  } else if (rotionDirection == ANTI_CLOCKWIZE) {
     steeringAngle = STRAIGHT_STEERING - 43;
     setSteering(steeringAngle);
   }
-  if (abs(currentAngle - initAngle) >= 80)
-  {
+  if (abs(currentAngle - initAngle) >= 80) {
     steering.write(STRAIGHT_STEERING);
     rounCounter++;
 
-    if (rotionDirection == ANTI_CLOCKWIZE || rotionDirection == UNKNOWN_DIRECTION)
-    {
+    if (rotionDirection == ANTI_CLOCKWIZE || rotionDirection == UNKNOWN_DIRECTION) {
       setpoint = rangeR + 5;
-    }
-    else if (rotionDirection == CLOCKWIZE)
-    {
+    } else if (rotionDirection == CLOCKWIZE) {
       setpoint = rangeL + 2;
     }
     encoder_count = 0;
@@ -66,29 +52,21 @@ void doTurnEncoder()
   }
 }
 //*****************************
-void doTurn()
-{
-  if (rotionDirection == CLOCKWIZE)
-  {
+void doTurn() {
+  if (rotionDirection == CLOCKWIZE) {
     steeringAngle = STRAIGHT_STEERING + 35;
     setSteering(steeringAngle);
-  }
-  else if (rotionDirection == ANTI_CLOCKWIZE)
-  {
+  } else if (rotionDirection == ANTI_CLOCKWIZE) {
     steeringAngle = STRAIGHT_STEERING - 43;
     setSteering(steeringAngle);
   }
-  if (abs(currentAngle - initAngle) >= 80 && encoder_count > 1680)
-  {
+  if (abs(currentAngle - initAngle) >= 80 && encoder_count > 1680) {
     steering.write(STRAIGHT_STEERING);
     rounCounter++;
 
-    if (rotionDirection == ANTI_CLOCKWIZE || rotionDirection == UNKNOWN_DIRECTION)
-    {
+    if (rotionDirection == ANTI_CLOCKWIZE || rotionDirection == UNKNOWN_DIRECTION) {
       setpoint = rangeR + 5;
-    }
-    else if (rotionDirection == CLOCKWIZE)
-    {
+    } else if (rotionDirection == CLOCKWIZE) {
       setpoint = rangeL + 2;
     }
     //  Serial.print("Encoder"); Serial.println(encoder_count);
@@ -96,63 +74,43 @@ void doTurn()
     motion_mode = FORWARD_ENCODER;
   }
 }
-void doPreFinal()
-{
+void doPreFinal() {
 
-  if ((rotionDirection == CLOCKWIZE) && (rangeF < (initL + 25) && rangeF > 1) && (rangeR > 120 || rangeR == 0))
-  {
+  if ((rotionDirection == CLOCKWIZE) && (rangeF < (initL + 25) && rangeF > 1) && (rangeR > 120 || rangeR == 0)) {
     initAngle = currentAngle;
     motion_mode = TURNE;
-  }
-  else if ((rotionDirection == ANTI_CLOCKWIZE) && (rangeF < (initR + 25) && rangeF > 1) && (rangeL > 120 || rangeL == 0))
-  {
+  } else if ((rotionDirection == ANTI_CLOCKWIZE) && (rangeF < (initR + 25) && rangeF > 1) && (rangeL > 120 || rangeL == 0)) {
     initAngle = currentAngle;
     motion_mode = TURNE;
-  }
-  else
-  {
+  } else {
     forward(255);
     steering.write(steeringPID);
-  } // go straight
+  }  // go straight
 }
-void doParking()
-{
-  if (rangeF < 146 && rangeF != 0 && encoder_count > 950)
-  {
+void doParking() {
+  if (rangeF < 146 && rangeF != 0 && encoder_count > 950) {
     Serial.print("Encoder");
     Serial.println(encoder_count);
     motion_mode = STOP;
-  }
-  else
-  {
+  } else {
     forward(255);
     steering.write(steeringPID);
   }
 }
-void doForward()
-{
+void doForward() {
 
-  if (rotionDirection == UNKNOWN_DIRECTION)
-  { // if direction not set
-    if ((rangeR > 120 || rangeR == 0))
-    {
+  if (rotionDirection == UNKNOWN_DIRECTION) {  // if direction not set
+    if ((rangeR > 120 || rangeR == 0)) {
       rotionDirection = CLOCKWIZE;
-    }
-    else if ((rangeL > 120 && prevRangeL > 120) /* || rangeL==0*/)
-    {
+    } else if ((rangeL > 120 && prevRangeL > 120) /* || rangeL==0*/) {
       rotionDirection = ANTI_CLOCKWIZE;
     }
   }
 
   // if(rounCounter==11){motion_mode=PRE_FINAL;}
-  if (rounCounter == 12)
-  {
-    motion_mode = PARKING;
-  } /*  ,prevRangeL*/
-  else
-  {
-    if ((rotionDirection == CLOCKWIZE || rotionDirection == UNKNOWN_DIRECTION) && (rangeF < 95 && rangeF > 1) && (rangeR > 120 || rangeR == 0))
-    {
+  if (rounCounter == 12) { motion_mode = PARKING; } /*  ,prevRangeL*/
+  else {
+    if ((rotionDirection == CLOCKWIZE || rotionDirection == UNKNOWN_DIRECTION) && (rangeF < 95 && rangeF > 1) && (rangeR > 120 || rangeR == 0)) {
       initAngle = currentAngle;
       motion_mode = TURNE;
       Serial.print("R");
@@ -160,9 +118,7 @@ void doForward()
       Serial.print("Encoder=");
       Serial.println(encoder_count);
       encoder_count = 0;
-    }
-    else if ((rotionDirection == ANTI_CLOCKWIZE || rotionDirection == UNKNOWN_DIRECTION) && (rangeF < 95 && rangeF > 1) && ((rangeL > 105) || (rangeL == 0)) || (rangeF < 50 && rangeF > 3))
-    {
+    } else if ((rotionDirection == ANTI_CLOCKWIZE || rotionDirection == UNKNOWN_DIRECTION) && (rangeF < 95 && rangeF > 1) && ((rangeL > 105) || (rangeL == 0)) || (rangeF < 50 && rangeF > 3)) {
       initAngle = currentAngle;
       steeringAngle = STRAIGHT_STEERING - 43;
       setSteering(steeringAngle);
@@ -172,47 +128,42 @@ void doForward()
       Serial.println(encoder_count);
       motion_mode = TURNE;
       encoder_count = 0;
-    }
-    else
-    {
+    } else {
       forward(255);
       steering.write(steeringPID);
-    } // go straight
+    }  // go straight
   }
 }
-// the main function of level 1
-void doLevel1()
-{
-  switch (motion_mode)
-  {
-  case STANDBY:
-    break;
-  case FORWARD:
-    if (!isStarted)
-    {
-      isStarted = true;
-      runTime = millis();
-    }
-    doForward();
-    break;
-  case FORWARD_ENCODER:
-    doForwardWithEncoder();
-    break;
-  case PRE_FINAL:
-    doPreFinal();
-    break;
-  case TURNE:
-    doTurn();
-    break;
-  case PARKING:
-    doParking();
-    break;
-  case STOP:
-    stop();
-    isStarted = false;
-    Serial.print("Time is : ");
-    Serial.println((millis() - runTime) / 1000);
-    ESP.restart();
-    break;
+//the main function of level 1
+void doLevel1() {
+  switch (motion_mode) {
+    case STANDBY:
+      break;
+    case FORWARD:
+      if (!isStarted) {
+        isStarted = true;
+        runTime = millis();
+      }
+      doForward();
+      break;
+    case FORWARD_ENCODER:
+      doForwardWithEncoder();
+      break;
+    case PRE_FINAL:
+      doPreFinal();
+      break;
+    case TURNE:
+      doTurn();
+      break;
+    case PARKING:
+      doParking();
+      break;
+    case STOP:
+      stop();
+      isStarted = false;
+      Serial.print("Time is : ");
+      Serial.println((millis() - runTime) / 1000);
+      ESP.restart();
+      break;
   }
 }
