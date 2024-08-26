@@ -8,11 +8,11 @@ We designed, assembled and programmed the robot, which we called Caesar, to perf
 # Team members #
 
 Coach's name: Ahmed Mazid Al-Bazour ,
-Email Address: ahmadbzoor48@gmail.com
-1) Student name: Hisham Omar Qalalwah ,
-Email Address: hishamqalalwal@gmail.com
+Email: ahmadbzoor48@gmail.com
+1) Student name: Hisham Omar Qalalwa ,
+Email: hishamqalalwal@gmail.com
 2) Student name: Majd Khaled Azzam ,
-Email Address: majoodazzam2@gmail.com
+Email: majoodazzam2@gmail.com
 
 
 # Content #
