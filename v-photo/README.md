@@ -1,5 +1,5 @@
 # Introduction #
-Folder contains photos of the CAESAR from all required directions
+Folder contains photos of the CAESAR from all required directions.
 
 
 # Overview #

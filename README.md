@@ -11,7 +11,7 @@ Coach's name: Ahmed Mazid Al-Bazour ,
 Email Address: ahmadbzoor48@gmail.com
 1) Student name: Hisham Omar Qalalwah ,
 Email Address: hishamqalalwal@gmail.com
-2) Student name and email: Majd Khaled Azzam ,
+2) Student name: Majd Khaled Azzam ,
 Email Address: majoodazzam2@gmail.com
 
 
