@@ -9,4 +9,3 @@ Folder contains photos of the CAESAR from all required directions.
 - `Left Side.jpg` Two incubators for controllers and other electronic parts.
 - `Right Side.jpg` Incubators for electronic parts with a light indicating the robot's mode.
 - `Top Side1.jpg` Operating button with 3D electronic parts carrier.
-- `Top Side2.jpg` To access the incubator, open it to reveal an ESP32 and an MPU inside. The incubator has a mode switch and a battery power input on top.
