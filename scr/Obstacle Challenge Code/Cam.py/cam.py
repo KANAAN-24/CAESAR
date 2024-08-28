@@ -1,10 +1,21 @@
 # Python code for Multiple Color Detection
+import RPi.GPIO as GPIO
+
+
 import argparse
 import serial
 import time
 import numpy as np
 import cv2
 import math
+
+
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(26,GPIO.OUT)
+GPIO.output(26,GPIO.LOW)
+GPIO.setup(19,GPIO.OUT)
+GPIO.output(19,GPIO.LOW)
 
 ap = argparse.ArgumentParser()
 ap.add_argument("-p", "--picamera", type=int, default=-1,
@@ -18,9 +29,15 @@ mingreen=10
 minred =10
 counter = 0
 limitCounter = 30
+ser = serial.Serial('/dev/ttyUSB0', 115200, timeout=1)
+GPIO.output(19,GPIO.LOW)
+time.sleep(1)
+GPIO.output(19,GPIO.HIGH)
+GPIO.output(26,GPIO.HIGH)
 
+ser.reset_input_buffer()
 # Capturing video through webcam
-webcam = cv2.VideoCapture(1,cv2.CAP_V4L2)
+webcam = cv2.VideoCapture(0,cv2.CAP_V4L2)
 redarea = 0
 greanarea = 0
 KNOWN_DISTANCE = 94  # centimeter
@@ -34,6 +51,8 @@ def Distance_finder(Focal_Length, real_face_width, face_width_in_frame):
     distance = (real_face_width * Focal_Length)/face_width_in_frame
     return distance
 while (1):
+    #print(ser.readline())
+   # line = ser.readline().decode('utf-8').rstrip()
     redcct=0
     greencct=0
     redy=0
@@ -214,15 +233,17 @@ while (1):
             counter =0
             mingreen=10
             minred =10
+            ser.write(b"NFF\n")
             print ("" + str(greanarea))
             print ("" + str( redarea) )
 
     elif mingreen >0 and minred >0 and greanarea < redarea :
-        state ="8"
+        state ="FNN"
         if counter > limitCounter :
             #ser.write(b"8\n")
            # line = ser.readline().decode('utf-8').rstrip()
             print("FNN")
+            ser.write(b"FNN\n")
             counter =0
             mingreen=10
             minred =10
@@ -236,6 +257,7 @@ while (1):
            # ser.write(b"6\n")
            # line = ser.readline().decode('utf-8').rstrip()
             print("NNN")
+            ser.write(b"NNN\n")
             counter =0
             mingreen=10
             minred =10
@@ -247,6 +269,7 @@ while (1):
             #ser.write(b"3\n")
            # line = ser.readline().decode('utf-8').rstrip()
             print("FFF")
+            ser.write(b"FFF\n")
             counter =0
             mingreen=10
             minred =10
