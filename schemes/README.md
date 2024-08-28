@@ -1,5 +1,5 @@
 # Introduction #
-Folder contains the electrical design schematics and the mechanic..
+Folder contains the electrical design schematics and the mechanic.
 
 
 # Overview #
