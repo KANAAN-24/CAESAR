@@ -1,1 +1,1 @@
-## This link for assembling CAESAR robot ##
+## Assembling CAESAR ##
