@@ -1,5 +1,6 @@
 
-enum MOTION_MODE {
+enum MOTION_MODE
+{
   STANDBY,
   FORWARD,
   FORWARD_ENCODER,
@@ -12,39 +13,52 @@ enum MOTION_MODE {
   SHIFT_LEFT,
   TURNENCODR1,
   TURNENCODER2,
+  LEARN,
+  BTWEEN_OB,
   STOP,
 } motion_mode = STANDBY;
 
 
-enum SHIFT_STAGES {
+enum SHIFT_STAGES
+{
+  BRE_SHIFT,
   TURN1,
   TURN2,
   STRIGHT,
   FINISH,
   REVERCE,
+ 
+} shift_Stages = BRE_SHIFT;
 
-} shift_Stages = TURN1;
-
-enum TURN_STAGES {
+enum TURN_STAGES
+{
   TURN_CALCULATIONS,
+  TURN_STRAIGHT,
   TURN_STRAIGHT1,
   TURN_STRAIGHT2,
   DO_TURN,
+  CHECK_ANGLE,
+  CORRECT_ANGLE,
+  CHECK,
+  REVERSE2,
+  FORWARD2,
   FINISH_TURN,
-
+ 
 } turne_Stages = TURN_CALCULATIONS;
 
-enum UTURN_STAGES {
+enum UTURN_STAGES
+{
   CALCULATIONS,
   STRAIGHT1,
   STRAIGHT2,
   STRAIGHT3,
   ROTATE,
   FINISH_UTURN,
-
+ 
 } uTurne_Stages = CALCULATIONS;
 
-enum MOVE_STAGE {
+enum MOVE_STAGE
+{
   STAGE1,
   STAGE2,
   STAGE3,
@@ -57,7 +71,8 @@ enum MOVE_STAGE {
 
 } move_Stage = STAGE1;
 
-enum OBSTACLE_STAGE {
+enum OBSTACLE_STAGE
+{
   FIRST,
   FFF,
   NFF,
@@ -70,7 +85,8 @@ enum OBSTACLE_STAGE {
   FINAL,
 } obstacle_Stage = FIRST;
 
-enum PRE_OB_STAGE {
+enum PRE_OB_STAGE
+{
   GO_,
   Go_FIRST_TURNE,
   Go_SECOND_TURNE,
@@ -82,9 +98,12 @@ enum PRE_OB_STAGE {
   END_,
 } pre_Ob_Stage = GO_;
 
-enum CORNER_STAGE {
+enum  CORNER_STAGE
+{
   START_,
   TURNE_L_,
+  TURN_ONE,
+  TURN_TOW,
   TURNE_R_,
   PRE_TURNE90_,
   REDEY_TO_TURNE_,
@@ -97,4 +116,4 @@ enum CORNER_STAGE {
   CORRECT_POS,
   SEE_OBSTACLE_,
   GO_TO_OB_,
-} corner_Stage = STRIGHT_;
+} corner_Stage =  STRIGHT_;
